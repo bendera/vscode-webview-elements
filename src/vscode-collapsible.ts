@@ -11,6 +11,17 @@ export class VscodeCollapsible extends LitElement {
   @property({type: String}) title = '';
   @property({type: Boolean}) open = false;
 
+  constructor() {
+    super();
+  }
+
+  private _onKeyDown(event: KeyboardEvent) {
+    console.log(event);
+    if (event.key === 'Enter' || event.key === ' ') {
+      this.open = !this.open;
+    }
+  }
+
   private onHeaderClick() {
     this.open = !this.open;
   }
@@ -107,6 +118,7 @@ export class VscodeCollapsible extends LitElement {
           tabindex="${this.tabIndex}"
           title="${this.title}"
           @click="${this.onHeaderClick}"
+          @keydown="${this._onKeyDown}"
         >
           ${icon}
           <h3 class="title">${this.title}</h3>
